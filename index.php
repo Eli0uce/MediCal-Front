@@ -61,7 +61,7 @@
   </div>
 
   <!-- Carte modale de rendez-vous -->
-  <div class="modal hidden mx-auto absolute inset-0 flex w-max items-center justify-center mt-52 z-50" id="rdv-modal">
+  <div class="modal hidden mx-auto fixed inset-0 flex w-max items-center justify-center mt-52 z-50" id="rdv-modal">
     <div class="modal-content bg-gray-custom mx-auto rounded-lg shadow-lg p-6">
       <form>
         <div class="flex w-full">
@@ -94,9 +94,14 @@
             <input type="hour" id="hour" name="hour" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Heure" />
           </div>
         </div>
-        <button type="submit" class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
-          <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
-        </button>
+        <div class="flex">
+          <button type="submit" class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
+            <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
+          </button>
+          <button class="mt-5 return bg-gray-custom text-white rounded-xl py-2 px-4 hover:bg-gray-custom">
+            Retour
+          </button>
+        </div>
       </form>
     </div>
   </div>
