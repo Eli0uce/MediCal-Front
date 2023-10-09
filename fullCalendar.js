@@ -1,4 +1,4 @@
-var auth = true;
+var auth = false;
 
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendar");
@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (auth) {
           events.push({
             id: eventData.rendezvous_id,
-            title: eventData.motif,
+            title: eventData.motif + " - " + eventData.patient,
+            backgroundColor: "#007BFF",
             start: eventData.date_et_heure,
             end: eventData.date_et_heure + eventData.duree * 60 * 1000,
           });
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
           events.push({
             id: eventData.rendezvous_id,
             title: "Complet",
+            backgroundColor: "#007BFF",
             start: eventData.date_et_heure,
             className: "rendezvous-non-connecte",
           });
