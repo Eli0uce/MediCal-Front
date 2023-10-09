@@ -61,37 +61,37 @@
   </div>
 
   <!-- Carte modale de rendez-vous -->
-  <div class="modal hidden absolute inset-0 flex items-center justify-center mt-52 text-white" id="rdv-modal">
-    <div class="modal-content bg-gray-custom w-96 mx-auto rounded-lg shadow-lg p-6">
+  <div class="modal hidden mx-auto absolute inset-0 flex w-max items-center justify-center mt-52 z-50" id="rdv-modal">
+    <div class="modal-content bg-gray-custom mx-auto rounded-lg shadow-lg p-6">
       <form>
         <div class="flex w-full">
           <div class="mb-4">
-            <label for="name" class="block">Nom</label>
-            <input type="name" id="name" name="name" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+            <label for="name" class="block text-white">Nom</label>
+            <input type="name" id="name" name="name" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Nom" />
           </div>
           <div class="ml-10 mb-4">
-            <label for="firstname" class="block">Prénom</label>
-            <input type="firstname" id="firstname" name="firstname" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+            <label for="firstname" class="block text-white">Prénom</label>
+            <input type="firstname" id="firstname" name="firstname" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Prénom" />
           </div>
         </div>
         <div class="flex w-full">
           <div class="mb-4">
-            <label for="email" class="block">Email</label>
-            <input type="email" id="email" name="email" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+            <label for="email" class="block text-white">Email</label>
+            <input type="email" id="email" name="email" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Email" />
           </div>
           <div class="ml-10 mb-4">
-            <label for="phone" class="block">Téléphone</label>
-            <input type="phone" id="phone" name="phone" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+            <label for="phone" class="block text-white">Téléphone</label>
+            <input type="phone" id="phone" name="phone" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Téléphone" />
           </div>
         </div>
         <div class="flex w-full">
           <div class="mb-4">
-            <label for="date" class="block">Date</label>
+            <label for="date" class="block text-white">Date</label>
             <input type="date" id="date" name="date" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
           </div>
           <div class="ml-10 mb-4">
-            <label for="hour" class="block">Heure</label>
-            <input type="hour" id="hour" name="hour" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+            <label for="hour" class="block text-white">Heure</label>
+            <input type="hour" id="hour" name="hour" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Heure" />
           </div>
         </div>
         <button type="submit" class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
@@ -141,18 +141,22 @@
     const loginModal = document.getElementById("login-modal");
     const rdvModal = document.getElementById("rdv-modal");
 
+    // JavaScript pour fermer la modal de connexion en cliquant sur la croix
     const openLoginModalButton = document.getElementById("open-login-modal");
     openLoginModalButton.addEventListener("click", () => {
       loginModal.style.display = "block";
     });
 
-    showRegistrationModalLink.addEventListener("click", () => {
-      loginModal.style.display = "block";
+    // JavaScript pour gérer l'affichage de la modal de rendez-vous
+    const openRdvModalButton = document.getElementById("open-rdv-modal");
+    openRdvModalButton.addEventListener("click", () => {
+      rdvModal.style.display = "block";
     });
 
-    const showRdvModalButton = document.getElementById("show-rdv-modal");
-    showRdvModalButton.addEventListener("click", () => {
-      rdvModal.style.display = "block";
+    // JavaScript pour fermer la modal de rendez-vous en cliquant sur la croix
+    const closeRdvModalButton = document.querySelector("#rdv-modal .close-modal");
+    closeRdvModalButton.addEventListener("click", () => {
+      rdvModal.style.display = "none";
     });
   </script>
 </body>
