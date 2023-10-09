@@ -33,7 +33,7 @@
   </header>
 
   <!-- Carte modale de connexion -->
-  <div class="modal hidden absolute inset-0 flex items-center justify-center mt-52 text-white" id="login-modal">
+  <div class="modal hidden mx-auto fixed inset-0 flex items-center justify-center mt-52 text-white z-50" id="login-modal">
     <div class="modal-content bg-gray-custom w-96 mx-auto rounded-lg shadow-lg p-6">
       <span class="close-modal absolute top-2 right-2 cursor-pointer hover:gray-custom">
         &times;
