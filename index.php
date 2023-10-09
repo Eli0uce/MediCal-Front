@@ -12,6 +12,7 @@
   <script src='fullcalendar/core/index.global.js'></script>
   <script src='fullcalendar/core/locales/fr.global.js'></script>
   <link href="style.css" rel="stylesheet" />
+  <script src="json.js"></script>
   <script src="fullCalendar.js"></script>
 </head>
 
