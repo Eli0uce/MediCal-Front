@@ -8,6 +8,31 @@
   <title>MediCal</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+  <script src='fullcalendar/core/index.global.js'></script>
+  <script src='fullcalendar/core/locales/fr.global.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridFiveDay',
+        locale: 'fr',
+        firstDay: 1,
+        height: 700,
+        slotMinTime: '08:00',
+        slotMaxTime: '19:00',
+        views: {
+          timeGridFiveDay: {
+            type: 'timeGrid',
+            duration: {
+              days: 5
+            }
+          }
+        }
+      });
+      calendar.render();
+    });
+  </script>
   <link href="style.css" rel="stylesheet" />
 </head>
 
@@ -113,7 +138,8 @@
       <hr class="border-gray-300 mb-8 mx-96" />
       <div class="flex">
         <div class="w-full mx-auto mr-10">
-          <table class="table-auto bg-white border rounded shadow-lg w-full">
+          <div id='calendar'></div>
+          <!-- <table class="table-auto bg-white border rounded shadow-lg w-full">
             <thead>
               <tr>
                 <th class="border p-2 bg-blue-custom"></th>
@@ -126,7 +152,6 @@
               </tr>
             </thead>
             <tbody id="table-body">
-              <!-- Heures -->
               <?php for ($hour = 8; $hour <= 18; $hour++) : ?>
                 <tr>
                   <td class="border p-2">
@@ -141,7 +166,7 @@
                 </tr>
               <?php endfor; ?>
             </tbody>
-          </table>
+          </table> -->
           <div>
             <button class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300" id="open-rdv-modal">
               <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
@@ -183,33 +208,59 @@
     // Exemple de données JSON pour les rendez-vous
     const jsonData = {
       "tables": [{
-        "table_name": "rendezvous",
-        "columns": [{
-            "rendezvous_id": 1,
-            "medecin_id": 1,
-            "patient": "Alice",
-            "date_et_heure": "2023-10-10 09:00:00",
-            "motif": "Consultation générale",
-            "duree": 30
-          },
-          {
-            "rendezvous_id": 2,
-            "medecin_id": 1,
-            "patient": "Bob",
-            "date_et_heure": "2023-10-11 14:30:00",
-            "motif": "Examen de routine",
-            "duree": 45
-          },
-          {
-            "rendezvous_id": 3,
-            "medecin_id": 2,
-            "patient": "Eva",
-            "date_et_heure": "2023-10-12 11:15:00",
-            "motif": "Suivi médical",
-            "duree": 30
-          }
-        ]
-      }]
+          "table_name": "medecin",
+          "columns": [{
+              "medecin_id": 1,
+              "nom": "Dupont",
+              "prenom": "Jean",
+              "email": "jean.dupont@example.com",
+              "mot_de_passe": "hashed_password_1"
+            },
+            {
+              "medecin_id": 2,
+              "nom": "Martin",
+              "prenom": "Marie",
+              "email": "marie.martin@example.com",
+              "mot_de_passe": "hashed_password_2"
+            },
+            {
+              "medecin_id": 3,
+              "nom": "Smith",
+              "prenom": "John",
+              "email": "john.smith@example.com",
+              "mot_de_passe": "hashed_password_3"
+            }
+          ]
+        },
+        {
+          "table_name": "rendezvous",
+          "columns": [{
+              "rendezvous_id": 1,
+              "medecin_id": 1,
+              "patient": "Alice",
+              "date_et_heure": "2023-10-10 09:00:00",
+              "motif": "Consultation générale",
+              "duree": 30
+            },
+            {
+              "rendezvous_id": 2,
+              "medecin_id": 1,
+              "patient": "Bob",
+              "date_et_heure": "2023-10-11 14:30:00",
+              "motif": "Examen de routine",
+              "duree": 45
+            },
+            {
+              "rendezvous_id": 3,
+              "medecin_id": 2,
+              "patient": "Eva",
+              "date_et_heure": "2023-10-12 11:15:00",
+              "motif": "Suivi médical",
+              "duree": 30
+            }
+          ]
+        }
+      ]
     };
 
     // Fonction pour afficher les rendez-vous dans le tableau
