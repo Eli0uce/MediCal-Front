@@ -38,21 +38,59 @@
       <form>
         <div class="mb-4">
           <label for="identifiant" class="block">Identifiant</label>
-          <input type="identifiant" id="identifiant" name="identifiant"
-            class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          <input type="identifiant" id="identifiant" name="identifiant" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
         </div>
         <div class="mb-4">
           <label for="password" class="block">Mot de passe</label>
-          <input type="password" id="password" name="password"
-            class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          <input type="password" id="password" name="password" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
         </div>
-        <button type="submit"
-          class="bg-blue-custom text-white rounded-full py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
+        <button type="submit" class="bg-blue-custom text-white rounded-full py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
           Se connecter
         </button>
         <!-- add Retour button -->
         <button class="return bg-gray-custom text-white rounded-full py-2 px-4 hover:bg-gray-custom">
           Retour
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Carte modale de rendez-vous -->
+  <div class="modal hidden absolute inset-0 flex items-center justify-center mt-52 text-white" id="rdv-modal">
+    <div class="modal-content bg-gray-custom w-96 mx-auto rounded-lg shadow-lg p-6">
+      <form>
+        <div class="flex w-full">
+          <div class="mb-4">
+            <label for="name" class="block">Nom</label>
+            <input type="name" id="name" name="name" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          </div>
+          <div class="ml-10 mb-4">
+            <label for="firstname" class="block">Prénom</label>
+            <input type="firstname" id="firstname" name="firstname" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          </div>
+        </div>
+        <div class="flex w-full">
+          <div class="mb-4">
+            <label for="email" class="block">Email</label>
+            <input type="email" id="email" name="email" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          </div>
+          <div class="ml-10 mb-4">
+            <label for="phone" class="block">Téléphone</label>
+            <input type="phone" id="phone" name="phone" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          </div>
+        </div>
+        <div class="flex w-full">
+          <div class="mb-4">
+            <label for="date" class="block">Date</label>
+            <input type="date" id="date" name="date" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          </div>
+          <div class="ml-10 mb-4">
+            <label for="hour" class="block">Heure</label>
+            <input type="hour" id="hour" name="hour" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          </div>
+        </div>
+        <button type="submit" class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
+          <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
         </button>
       </form>
     </div>
@@ -87,9 +125,9 @@
                 <th class="border p-2">Samedi</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="table-body">
               <!-- Heures -->
-              <?php for ($hour = 8; $hour <= 18; $hour++): ?>
+              <?php for ($hour = 8; $hour <= 18; $hour++) : ?>
                 <tr>
                   <td class="border p-2">
                     <?php echo $hour . ":00"; ?>
@@ -104,49 +142,12 @@
               <?php endfor; ?>
             </tbody>
           </table>
+          <div>
+            <button class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300" id="open-rdv-modal">
+              <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
+            </button>
+          </div>
         </div>
-        <form>
-          <div class="flex w-full">
-            <div class="mb-4">
-              <label for="name" class="block">Nom</label>
-              <input type="name" id="name" name="name"
-                class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
-            </div>
-            <div class="ml-10 mb-4">
-              <label for="firstname" class="block">Prénom</label>
-              <input type="firstname" id="firstname" name="firstname"
-                class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
-            </div>
-          </div>
-          <div class="flex w-full">
-            <div class="mb-4">
-              <label for="email" class="block">Email</label>
-              <input type="email" id="email" name="email"
-                class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
-            </div>
-            <div class="ml-10 mb-4">
-              <label for="phone" class="block">Téléphone</label>
-              <input type="phone" id="phone" name="phone"
-                class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
-            </div>
-          </div>
-          <div class="flex w-full">
-            <div class="mb-4">
-              <label for="date" class="block">Date</label>
-              <input type="date" id="date" name="date"
-                class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
-            </div>
-            <div class="ml-10 mb-4">
-              <label for="hour" class="block">Heure</label>
-              <input type="hour" id="hour" name="hour"
-                class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
-            </div>
-          </div>
-          <button type="submit"
-            class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
-            <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
-          </button>
-        </form>
       </div>
   </main>
 
@@ -161,11 +162,9 @@
   <script>
     // JavaScript pour gérer l'affichage de la modal de connexion
     const loginModal = document.getElementById("login-modal");
-    const showRegistrationModalLink = document.getElementById(
-      "show-registration-modal"
-    );
-    const openLoginModalButton = document.getElementById("open-login-modal");
+    const rdvModal = document.getElementById("rdv-modal");
 
+    const openLoginModalButton = document.getElementById("open-login-modal");
     openLoginModalButton.addEventListener("click", () => {
       loginModal.style.display = "block";
     });
@@ -173,6 +172,89 @@
     showRegistrationModalLink.addEventListener("click", () => {
       loginModal.style.display = "block";
     });
+
+    const showRdvModalButton = document.getElementById("show-rdv-modal");
+    showRdvModalButton.addEventListener("click", () => {
+      rdvModal.style.display = "block";
+    });
+  </script>
+
+  <script>
+    // Exemple de données JSON pour les rendez-vous
+    const jsonData = {
+      "tables": [{
+        "table_name": "rendezvous",
+        "columns": [{
+            "rendezvous_id": 1,
+            "medecin_id": 1,
+            "patient": "Alice",
+            "date_et_heure": "2023-10-10 09:00:00",
+            "motif": "Consultation générale",
+            "duree": 30
+          },
+          {
+            "rendezvous_id": 2,
+            "medecin_id": 1,
+            "patient": "Bob",
+            "date_et_heure": "2023-10-11 14:30:00",
+            "motif": "Examen de routine",
+            "duree": 45
+          },
+          {
+            "rendezvous_id": 3,
+            "medecin_id": 2,
+            "patient": "Eva",
+            "date_et_heure": "2023-10-12 11:15:00",
+            "motif": "Suivi médical",
+            "duree": 30
+          }
+        ]
+      }]
+    };
+
+    // Fonction pour afficher les rendez-vous dans le tableau
+    function displayRdv(jsonData) {
+      const tableBody = document.getElementById("table-body");
+      const rdvs = jsonData.tables[0].columns;
+
+      // On boucle sur les rendez-vous
+      for (const rdv of rdvs) {
+        // On récupère la date et l'heure du rendez-vous
+        const dateEtHeure = rdv.date_et_heure;
+        // On récupère le jour de la semaine
+        const day = new Date(dateEtHeure).getDay();
+        // On récupère l'heure du rendez-vous
+        const hour = new Date(dateEtHeure).getHours();
+        // On récupère la durée du rendez-vous
+        const duration = rdv.duree;
+
+        // On récupère la ligne du tableau correspondant au jour et à l'heure du rendez-vous
+        const row = tableBody.children[hour - 8].children[day];
+
+        // On crée un élément <div> pour afficher le rendez-vous
+        const rdvDiv = document.createElement("div");
+        rdvDiv.classList.add("bg-blue-custom", "text-white", "rounded-lg", "p-2", "mb-1");
+        rdvDiv.textContent = rdv.patient + " (" + rdv.motif + ")";
+
+        // On ajoute le rendez-vous à la ligne du tableau
+        row.appendChild(rdvDiv);
+
+        // On calcule le nombre de cases à vider pour la durée du rendez-vous
+        const nbEmptyCells = duration / 15 - 1;
+
+        // On boucle pour ajouter les cases vides
+        for (let i = 0; i < nbEmptyCells; i++) {
+          // On crée un élément <div> pour afficher la case vide
+          const emptyDiv = document.createElement("div");
+          emptyDiv.classList.add("bg-blue-custom", "text-white", "rounded-lg", "p-2", "mb-1");
+          // On ajoute la case vide à la ligne du tableau
+          row.appendChild(emptyDiv);
+        }
+      }
+    }
+
+    // On appelle la fonction pour afficher les rendez-vous
+    displayRdv(jsonData);
   </script>
 </body>
 
