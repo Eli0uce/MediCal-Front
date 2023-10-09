@@ -11,30 +11,8 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
   <script src='fullcalendar/core/index.global.js'></script>
   <script src='fullcalendar/core/locales/fr.global.js'></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridFiveDay',
-        locale: 'fr',
-        allDaySlot: false,
-        firstDay: 1,
-        height: 650,
-        slotMinTime: '08:00',
-        slotMaxTime: '19:00',
-        views: {
-          timeGridFiveDay: {
-            type: 'timeGrid',
-            duration: {
-              days: 5
-            }
-          }
-        }
-      });
-      calendar.render();
-    });
-  </script>
   <link href="style.css" rel="stylesheet" />
+  <script src="fullCalendar.js"></script>
 </head>
 
 <body>
@@ -140,34 +118,6 @@
       <div class="flex">
         <div class="w-full mx-auto mr-10">
           <div id='calendar'></div>
-          <!-- <table class="table-auto bg-white border rounded shadow-lg w-full">
-            <thead>
-              <tr>
-                <th class="border p-2 bg-blue-custom"></th>
-                <th class="border p-2">Lundi</th>
-                <th class="border p-2">Mardi</th>
-                <th class="border p-2">Mercredi</th>
-                <th class="border p-2">Jeudi</th>
-                <th class="border p-2">Vendredi</th>
-                <th class="border p-2">Samedi</th>
-              </tr>
-            </thead>
-            <tbody id="table-body">
-              <?php for ($hour = 8; $hour <= 18; $hour++) : ?>
-                <tr>
-                  <td class="border p-2">
-                    <?php echo $hour . ":00"; ?>
-                  </td>
-                  <td class="border p-2"></td>
-                  <td class="border p-2"></td>
-                  <td class="border p-2"></td>
-                  <td class="border p-2"></td>
-                  <td class="border p-2"></td>
-                  <td class="border p-2"></td>
-                </tr>
-              <?php endfor; ?>
-            </tbody>
-          </table> -->
           <div>
             <button class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300" id="open-rdv-modal">
               <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
@@ -203,110 +153,6 @@
     showRdvModalButton.addEventListener("click", () => {
       rdvModal.style.display = "block";
     });
-  </script>
-
-  <script>
-    // Exemple de données JSON pour les rendez-vous
-    const jsonData = {
-      "tables": [{
-          "table_name": "medecin",
-          "columns": [{
-              "medecin_id": 1,
-              "nom": "Dupont",
-              "prenom": "Jean",
-              "email": "jean.dupont@example.com",
-              "mot_de_passe": "hashed_password_1"
-            },
-            {
-              "medecin_id": 2,
-              "nom": "Martin",
-              "prenom": "Marie",
-              "email": "marie.martin@example.com",
-              "mot_de_passe": "hashed_password_2"
-            },
-            {
-              "medecin_id": 3,
-              "nom": "Smith",
-              "prenom": "John",
-              "email": "john.smith@example.com",
-              "mot_de_passe": "hashed_password_3"
-            }
-          ]
-        },
-        {
-          "table_name": "rendezvous",
-          "columns": [{
-              "rendezvous_id": 1,
-              "medecin_id": 1,
-              "patient": "Alice",
-              "date_et_heure": "2023-10-10 09:00:00",
-              "motif": "Consultation générale",
-              "duree": 30
-            },
-            {
-              "rendezvous_id": 2,
-              "medecin_id": 1,
-              "patient": "Bob",
-              "date_et_heure": "2023-10-11 14:30:00",
-              "motif": "Examen de routine",
-              "duree": 45
-            },
-            {
-              "rendezvous_id": 3,
-              "medecin_id": 2,
-              "patient": "Eva",
-              "date_et_heure": "2023-10-12 11:15:00",
-              "motif": "Suivi médical",
-              "duree": 30
-            }
-          ]
-        }
-      ]
-    };
-
-    // Fonction pour afficher les rendez-vous dans le tableau
-    function displayRdv(jsonData) {
-      const tableBody = document.getElementById("table-body");
-      const rdvs = jsonData.tables[0].columns;
-
-      // On boucle sur les rendez-vous
-      for (const rdv of rdvs) {
-        // On récupère la date et l'heure du rendez-vous
-        const dateEtHeure = rdv.date_et_heure;
-        // On récupère le jour de la semaine
-        const day = new Date(dateEtHeure).getDay();
-        // On récupère l'heure du rendez-vous
-        const hour = new Date(dateEtHeure).getHours();
-        // On récupère la durée du rendez-vous
-        const duration = rdv.duree;
-
-        // On récupère la ligne du tableau correspondant au jour et à l'heure du rendez-vous
-        const row = tableBody.children[hour - 8].children[day];
-
-        // On crée un élément <div> pour afficher le rendez-vous
-        const rdvDiv = document.createElement("div");
-        rdvDiv.classList.add("bg-blue-custom", "text-white", "rounded-lg", "p-2", "mb-1");
-        rdvDiv.textContent = rdv.patient + " (" + rdv.motif + ")";
-
-        // On ajoute le rendez-vous à la ligne du tableau
-        row.appendChild(rdvDiv);
-
-        // On calcule le nombre de cases à vider pour la durée du rendez-vous
-        const nbEmptyCells = duration / 15 - 1;
-
-        // On boucle pour ajouter les cases vides
-        for (let i = 0; i < nbEmptyCells; i++) {
-          // On crée un élément <div> pour afficher la case vide
-          const emptyDiv = document.createElement("div");
-          emptyDiv.classList.add("bg-blue-custom", "text-white", "rounded-lg", "p-2", "mb-1");
-          // On ajoute la case vide à la ligne du tableau
-          row.appendChild(emptyDiv);
-        }
-      }
-    }
-
-    // On appelle la fonction pour afficher les rendez-vous
-    displayRdv(jsonData);
   </script>
 </body>
 
