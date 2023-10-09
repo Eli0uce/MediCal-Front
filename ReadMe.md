@@ -6,8 +6,8 @@ Projet MediCal
 
 Connexion Médecin :
 
-- identifiant : jean.dupont@example.com
-- mot de passe : JD2023*
+- Identifiant : jean.dupont@example.com
+- Mot de passe : JD2023*
 
 ### Pré-requis
 
