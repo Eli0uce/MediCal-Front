@@ -1,4 +1,4 @@
-var auth = false;
+var auth = true;
 
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendar");
