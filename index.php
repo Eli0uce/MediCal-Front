@@ -17,8 +17,9 @@
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridFiveDay',
         locale: 'fr',
+        allDaySlot: false,
         firstDay: 1,
-        height: 700,
+        height: 650,
         slotMinTime: '08:00',
         slotMaxTime: '19:00',
         views: {
