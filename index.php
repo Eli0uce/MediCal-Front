@@ -33,20 +33,20 @@
   </header>
 
   <!-- Carte modale de connexion -->
-  <div class="modal hidden mx-auto fixed inset-0 flex items-center justify-center mt-52 text-white z-50" id="login-modal">
+  <div class="modal hidden mx-auto fixed inset-0 flex items-center justify-center mt-52 z-50" id="login-modal">
     <div class="modal-content bg-gray-custom w-96 mx-auto rounded-lg shadow-lg p-6">
       <span class="close-modal absolute top-2 right-2 cursor-pointer hover:gray-custom">
         &times;
       </span>
-      <h2 class="text-2xl font-semibold mb-4">Connexion</h2>
+      <h2 class="text-2xl font-semibold mb-4 text-white">Connexion</h2>
       <!-- Ajoutez ici votre formulaire de connexion ou d'autres éléments -->
-      <form>
+      <form id="login-form">
         <div class="mb-4">
-          <label for="identifiant" class="block">Identifiant</label>
+          <label for="identifiant" class="block text-white">Identifiant</label>
           <input type="identifiant" id="identifiant" name="identifiant" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
         </div>
         <div class="mb-4">
-          <label for="password" class="block">Mot de passe</label>
+          <label for="password" class="block text-white">Mot de passe</label>
           <input type="password" id="password" name="password" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
         </div>
         <button type="submit" class="bg-blue-custom text-white rounded-full py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
@@ -159,11 +159,13 @@
     });
 
     // JavaScript pour fermer la modal de rendez-vous en cliquant sur la croix
-    const closeRdvModalButton = document.querySelector("#rdv-modal .close-modal");
-    closeRdvModalButton.addEventListener("click", () => {
-      rdvModal.style.display = "none";
-    });
+    // const closeRdvModalButton = document.querySelector("#rdv-modal .close-modal");
+    // closeRdvModalButton.addEventListener("click", () => {
+    //   rdvModal.style.display = "none";
+    // });
+    console.log(auth);
   </script>
+  <script type="module" src="js/loginForm.js"></script>
 </body>
 
 </html>
