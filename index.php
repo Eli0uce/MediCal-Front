@@ -1,3 +1,11 @@
+<?php
+$jsonData = file_get_contents('datas.json');
+
+$medecinsData = json_decode($jsonData, true);
+
+$medecins = $medecinsData["tables"][0]["columns"];
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,7 +21,7 @@
   <script src='fullcalendar/core/locales/fr.global.js'></script>
   <link href="style.css" rel="stylesheet" />
   <script src="js/json.js"></script>
-  <script src="js/fullCalendar.js"></script>
+  <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -43,13 +51,16 @@
       <form id="login-form">
         <div class="mb-4">
           <label for="identifiant" class="block text-white">Identifiant</label>
-          <input type="identifiant" id="identifiant" name="identifiant" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          <input type="identifiant" id="identifiant" name="identifiant"
+            class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
         </div>
         <div class="mb-4">
           <label for="password" class="block text-white">Mot de passe</label>
-          <input type="password" id="password" name="password" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+          <input type="password" id="password" name="password"
+            class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300" />
         </div>
-        <button type="submit" class="bg-blue-custom text-white rounded-full py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
+        <button type="submit"
+          class="bg-blue-custom text-white rounded-full py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
           Se connecter
         </button>
         <!-- add Retour button -->
@@ -60,47 +71,60 @@
     </div>
   </div>
 
-  <!-- Carte modale de rendez-vous -->
+  <!-- Carte modale de rendez-vous patient -->
   <div class="modal hidden mx-auto fixed inset-0 flex w-max items-center justify-center mt-52 z-50" id="rdv-modal">
     <div class="modal-content bg-gray-custom mx-auto rounded-lg shadow-lg p-6">
-      <form>
-        <div class="flex w-full">
-          <div class="mb-4">
-            <label for="name" class="block text-white">Nom</label>
-            <input type="name" id="name" name="name" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Nom" />
-          </div>
-          <div class="ml-10 mb-4">
-            <label for="firstname" class="block text-white">Prénom</label>
-            <input type="firstname" id="firstname" name="firstname" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Prénom" />
-          </div>
+      <form id="rdv-form">
+        <div class="mb-4">
+          <label for="medecin" class="block text-white">Médecin</label>
+          <select name="medecin" id="medecin" class="p-2 rounded-md" required>
+            <option value="" selected disabled>Choisissez un médecin</option>
+            <?php
+            foreach ($medecins as $medecin) {
+              echo '<option value="' . $medecin["medecin_id"] . '">' . $medecin["nom"] . ' ' . $medecin["prenom"] . '</option>';
+            }
+            ?>
+          </select>
         </div>
         <div class="flex w-full">
           <div class="mb-4">
-            <label for="email" class="block text-white">Email</label>
-            <input type="email" id="email" name="email" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Email" />
+            <label for="name" class="block text-white">Nom</label>
+            <input type="text" id="name" name="name" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300"
+              placeholder="Nom" />
           </div>
           <div class="ml-10 mb-4">
-            <label for="phone" class="block text-white">Téléphone</label>
-            <input type="phone" id="phone" name="phone" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Téléphone" />
+            <label for="firstname" class="block text-white">Prénom</label>
+            <input type="text" id="firstname" name="firstname"
+              class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Prénom" />
           </div>
         </div>
         <div class="flex w-full">
           <div class="mb-4">
             <label for="date" class="block text-white">Date</label>
-            <input type="date" id="date" name="date" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
+            <input type="date" id="date" name="date"
+              class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" />
           </div>
           <div class="ml-10 mb-4">
-            <label for="hour" class="block text-white">Heure</label>
-            <input type="hour" id="hour" name="hour" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300" placeholder="Heure" />
+            <label for="heure" class="block text-white">Heure</label>
+            <input type="text" id="heure" name="heure" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300"
+              placeholder="Heure" />
+          </div>
+        </div>
+        <div class="flex w-full">
+          <div class="mb-4">
+            <label for="motif" class="block text-white">Motif</label>
+            <input type="text" id="motif" name="motif" class="w-72 border rounded-lg p-2 focus:ring focus:ring-blue-300"
+              placeholder="Motif" />
           </div>
         </div>
         <div class="flex">
-          <button type="submit" class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
+          <button type="submit"
+            class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300">
             <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
           </button>
-          <button class="mt-5 return bg-gray-custom text-white rounded-xl py-2 px-4 hover:bg-gray-custom">
+          <a href="/" class="mt-5 return bg-gray-custom text-white rounded-xl py-2 px-4 hover:bg-gray-custom">
             Retour
-          </button>
+          </a>
         </div>
       </form>
     </div>
@@ -125,7 +149,9 @@
         <div class="w-full mx-auto mr-10">
           <div id='calendar'></div>
           <div>
-            <button class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300" id="open-rdv-modal">
+            <button
+              class="mt-5 bg-blue-custom text-white rounded-xl py-2 px-4 hover:bg-blue-custom focus:outline-none focus:ring focus:ring-blue-300"
+              id="open-rdv-modal">
               <i class="fa-solid fa-bookmark"></i> Prendre rendez-vous
             </button>
           </div>
@@ -157,15 +183,7 @@
     openRdvModalButton.addEventListener("click", () => {
       rdvModal.style.display = "block";
     });
-
-    // JavaScript pour fermer la modal de rendez-vous en cliquant sur la croix
-    // const closeRdvModalButton = document.querySelector("#rdv-modal .close-modal");
-    // closeRdvModalButton.addEventListener("click", () => {
-    //   rdvModal.style.display = "none";
-    // });
-    console.log(auth);
   </script>
-  <script type="module" src="js/loginForm.js"></script>
 </body>
 
 </html>
